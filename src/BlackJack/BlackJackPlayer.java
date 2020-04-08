@@ -1,3 +1,5 @@
+package BlackJack;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -6,10 +8,16 @@ public class BlackJackPlayer extends Player {
     Scanner input = new Scanner(System.in);
     private int cash = 1000;
     private int playerbet = 0;
+    
+    public int clearBet(){
+    
+        this.playerbet = 0;
+        return this.playerbet;
+        
+    }
 
-    public void bet() {
-
-        System.out.println("Place your Bet");
+    public void setBet(){
+            System.out.println("Place your Bet");
         try {
             playerbet = input.nextInt();
 
@@ -18,6 +26,42 @@ public class BlackJackPlayer extends Player {
             input.nextLine();
             bet();
 
+        }
+    }
+    
+    public boolean checkBet (int bet, int cash){
+        
+        cash = this.cash;
+        
+        cash = cash - bet;
+        
+        if(bet < 0 ){
+            return false;
+        }
+         
+        if(bet > cash ){
+            return false;
+        }
+        if (bet > 999999999){
+            
+            return false;
+        
+        }
+        return true; 
+        
+    }
+    
+    public void bet() {
+        
+        if(checkBet(playerbet, cash) == false){
+        System.out.println("invaild bet"); 
+        bet();
+        }
+        cash = cash - playerbet;
+        
+        if (playerbet == 0){
+            System.out.println("Can't Bet Zero");
+            bet();
         }
 
         if (playerbet > cash) {
@@ -29,7 +73,7 @@ public class BlackJackPlayer extends Player {
             System.out.println("Cannot have a bet of Zero");
             bet();
         }
-        cash = cash - playerbet;
+        
 
         if (cash < 0) {
 

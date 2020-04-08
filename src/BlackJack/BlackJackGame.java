@@ -1,3 +1,4 @@
+package BlackJack;
 
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class BlackJackGame {
 
         Bet.checkcash();
         Bet.showCash();
+        Bet.setBet();
         Bet.bet();
 
         Card.createdeck();
@@ -54,6 +56,7 @@ public class BlackJackGame {
                 System.out.println("Dealer wins");
                 Bet.showCash();
             }
+            
             if (Card.calcPlayerSum() > Card.calcDealerSum()) {
                 System.out.println("You win");
                 Bet.payOutWin();
@@ -139,6 +142,7 @@ public class BlackJackGame {
             Card.playercard.clear();
             Card.dealercard.clear();
             Card.deck.clear();
+            Bet.clearBet();
             play();
 
         } else if (playagain.toUpperCase().equals("NO")) {
@@ -146,6 +150,7 @@ public class BlackJackGame {
         } else {
             newHand();
         }
+        
     }
 
     private void playerBust() {
