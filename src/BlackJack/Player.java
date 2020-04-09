@@ -1,6 +1,4 @@
 package BlackJack;
-
-
 public class Player {
 
     private int playerid = 0;

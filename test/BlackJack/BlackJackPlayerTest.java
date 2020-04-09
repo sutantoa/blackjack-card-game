@@ -38,63 +38,53 @@ public class BlackJackPlayerTest {
     }
 
     /**
-     * Test of clearBet method, of class BlackJackPlayer.
+     * Test of bet method, of class BlackJackPlayer.
      */
-    @Test
-    public void testClearBet() {
-        System.out.println("clearBet");
-        BlackJackPlayer instance = new BlackJackPlayer();
-        int expResult = 0;
-        int result = instance.clearBet();
-        assertEquals(expResult, result);
-    }
 
 
+    /**
+     * Test of checkBet method, of class BlackJackPlayer.
+     */
     @Test
     public void testCheckBet() {
         System.out.println("checkBet");
         int bet = 100;
-        int cash = 10000;
+        int cash = 1000;
         BlackJackPlayer instance = new BlackJackPlayer();
         boolean expResult = true;
         boolean result = instance.checkBet(bet, cash);
         assertEquals(expResult, result);
-
     }
     @Test
-    public void testCheckBetNegitve() {
+    public void testCheckBetNeg() {
         System.out.println("checkBet");
-        int bet = -100;
-        int cash = 10000;
+        int bet = -990;
+        int cash = 1000;
         BlackJackPlayer instance = new BlackJackPlayer();
         boolean expResult = false;
         boolean result = instance.checkBet(bet, cash);
         assertEquals(expResult, result);
-
     }
     @Test
     public void testCheckBetBoundry() {
         System.out.println("checkBet");
-        int bet = 1000000000;
-        int cash = 10000;
+        int bet = 1999999990;
+        int cash = 100;
         BlackJackPlayer instance = new BlackJackPlayer();
         boolean expResult = false;
         boolean result = instance.checkBet(bet, cash);
         assertEquals(expResult, result);
-
     }
     @Test
-    public void testCheckOverbet() {
+    public void testCheckBetOverbet() {
         System.out.println("checkBet");
-        int bet =  10001;
-        int cash = 10000;
+        int bet = 12000;
+        int cash = 1000;
         BlackJackPlayer instance = new BlackJackPlayer();
         boolean expResult = false;
         boolean result = instance.checkBet(bet, cash);
         assertEquals(expResult, result);
-
     }
-   
 
     /**
      * Test of payOutWin method, of class BlackJackPlayer.

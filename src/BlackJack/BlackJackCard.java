@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BlackJackCard extends Card {
-    ArrayList<BlackJackCard> deck = new ArrayList<>();
-    ArrayList<BlackJackCard> playercard = new ArrayList<>();
-    ArrayList<BlackJackCard> dealercard = new ArrayList<>();
+    ArrayList<BlackJackCard> deck = new ArrayList<BlackJackCard>();
+    ArrayList<BlackJackCard> playercard = new ArrayList<BlackJackCard>();
+    ArrayList<BlackJackCard> dealercard = new ArrayList<BlackJackCard>();
     private int ptotal = 0;
     private int dtotal = 0;
 
