@@ -4,15 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BlackJackCard extends Card {
-    ArrayList<BlackJackCard> deck = new ArrayList<BlackJackCard>();
-    ArrayList<BlackJackCard> playercard = new ArrayList<BlackJackCard>();
-    ArrayList<BlackJackCard> dealercard = new ArrayList<BlackJackCard>();
+    private ArrayList<BlackJackCard> deck = new ArrayList<>();
+    private ArrayList<BlackJackCard> playercard = new ArrayList<>();
+    private ArrayList<BlackJackCard> dealercard = new ArrayList<>();
     private int ptotal = 0;
     private int dtotal = 0;
+    
+    public ArrayList<BlackJackCard> getDeck() {
+        return deck;
+    }
+
+    public ArrayList<BlackJackCard> getPlayercard() {
+        return playercard;
+    }
+
+    public ArrayList<BlackJackCard> getDealercard() {
+        return dealercard;
+    }
 
     public void createdeck() {
 
-        String[] suit = new String[] { "Spades", "Heart", "Clubs", "Diamonds" };
+        String[] suit = { "Spades", "Hearts", "Clubs", "Diamonds" };
 
         for (int j = 0; j < 4; j++) {
 
@@ -32,15 +44,19 @@ public class BlackJackCard extends Card {
         Collections.shuffle(deck);
     }
 
-    public void dealToDealer() {
-        BlackJackCard c = deck.remove(0);
-        dealercard.add(c);
+    public void dealToDealer(){
+        if(!deck.isEmpty()){
+            BlackJackCard c = deck.remove(0);
+            dealercard.add(c);
+        }
 
     }
 
     public void dealToPlayer() {
-        BlackJackCard c = deck.remove(0);
-        playercard.add(c);
+        if(!deck.isEmpty()){
+            BlackJackCard c = deck.remove(0);
+            playercard.add(c);
+        }
 
     }
 

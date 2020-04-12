@@ -1,7 +1,7 @@
 package BlackJack;
 public class Player {
 
-    private int playerid = 0;
-    private String playername = " ";
+    private final int playerid = 0;
+    private final String playername = " ";
 
 }

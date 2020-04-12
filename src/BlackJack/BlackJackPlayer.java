@@ -10,64 +10,78 @@ public class BlackJackPlayer extends Player {
     private int playerbet = 0;
 
     public void bet() {
-
-        System.out.println("Place your Bet");
-        try {
-            playerbet = input.nextInt();
-
-        } catch (InputMismatchException e) {
-            System.out.println("Not a Vaild bet");
-            input.nextLine();
-            bet();
-
-        }
         
-        if (checkBet(playerbet,cash)==false){
-            bet();
-        }
+        do{
+
+            System.out.println("Place your Bet");
+            try {
+
+                if(input.hasNextLine()){
+
+
+                    playerbet = Integer.parseInt(input.nextLine());
+
+                    System.out.println("Bet: " + playerbet);
+
+                    /*if (cash < 0) {
+
+                        System.out.println("You're out of Cash");
+
+                        System.exit(0);
+
+                    }*/
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Not a Vaild bet");
+
+                /*if(input.hasNextLine()){
+                    playerbet = input.nextInt();
+                    //bet();
+                }*/
+
+            }catch (NumberFormatException e){
+                System.out.println("Not a Valid bet");
+            }
+
+            /*if (!checkBet(playerbet,cash)){
+                bet();
+            }*/
+
+            //input.nextLine();
+
+        }while(!checkBet());
         
         cash = cash - playerbet;
-        
-        
-        if (cash < 0) {
-
-            System.out.println("Your out of Cash");
-
-            System.exit(0);
-
-        }
-
-
-        input.nextLine();
 
     }
     
     
-    public boolean checkBet(int bet, int cash){
+    public boolean checkBet(){
         
-        if (bet > cash) {
+        if (playerbet > cash) {
             System.out.println("Not enough cash to place bet");
      
             return false;
         }
 
-        if (bet == 0) {
+        /*if (playerbet == 0) {
             System.out.println("Cannot have a bet of Zero");
     
             return false;
-        }
+        }*/
         
-        if (bet < 0 ){
+        if (playerbet <= 0 ){
             
-            System.out.println("invalid bet");
+            System.out.println("Invalid bet");
           
             return false;
         
         }
               
-        if (bet > 999999999 ){
+        if (playerbet > 999999999 ){
             
-            System.out.println("invalid bet");
+            System.out.println("Invalid bet");
           
             return false;
         
@@ -93,7 +107,7 @@ public class BlackJackPlayer extends Player {
         playerbet = 0;
 
         if (cash <= 0) {
-            System.out.println("Your out of Cash");
+            System.out.println("You're out of Cash");
 
             System.exit(0);
 
@@ -103,7 +117,7 @@ public class BlackJackPlayer extends Player {
 
     public void showCash() {
 
-        System.out.println("Cash " + cash);
+        System.out.println("Cash: " + cash);
         if (playerbet > 0) {
             System.out.println("You bet " + playerbet);
 
