@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BlackJackPlayer extends Player {
 
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
     private int cash = 1000;
     private int playerbet = 0;
 
@@ -13,32 +13,29 @@ public class BlackJackPlayer extends Player {
 
         System.out.println("Place your Bet");
         try {
-            playerbet = input.nextInt();
+            if(input.hasNextInt())
+                playerbet = input.nextInt();
 
         } catch (InputMismatchException e) {
             System.out.println("Not a Vaild bet");
-            input.nextLine();
-            bet();
-
+            if(input.hasNextLine()){
+                input.nextLine();
+                bet();
+            }
         }
         
-        if (checkBet(playerbet,cash)==false){
+        if (!checkBet(playerbet,cash))
             bet();
-        }
         
         cash = cash - playerbet;
         
-        
         if (cash < 0) {
-
-            System.out.println("Your out of Cash");
-
+            System.out.println("You're out of Cash");
             System.exit(0);
-
         }
-
-
-        input.nextLine();
+        
+        if(input.hasNextLine())
+            input.nextLine();
 
     }
     
@@ -93,7 +90,7 @@ public class BlackJackPlayer extends Player {
         playerbet = 0;
 
         if (cash <= 0) {
-            System.out.println("Your out of Cash");
+            System.out.println("You're out of Cash");
 
             System.exit(0);
 

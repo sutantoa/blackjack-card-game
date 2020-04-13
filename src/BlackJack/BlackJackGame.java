@@ -3,27 +3,35 @@ import java.util.Scanner;
 
 public class BlackJackGame {
 
-    Scanner input = new Scanner(System.in);
-    BlackJackCard Card = new BlackJackCard();
-    BlackJackPlayer Bet = new BlackJackPlayer();
+    private Scanner input = new Scanner(System.in);
+    private BlackJackCard card = new BlackJackCard();
+    private BlackJackPlayer bet = new BlackJackPlayer();
+
+    public void setCard(BlackJackCard card) {
+        this.card = card;
+    }
+
+    public void setBet(BlackJackPlayer bet) {
+        this.bet = bet;
+    }
 
     public void play() {
         System.out.println();
 
-        Bet.checkcash();
-        Bet.showCash();
-        Bet.bet();
+        bet.checkcash();
+        bet.showCash();
+        bet.bet();
 
-        Card.createdeck();
-        Card.shuffleDeck();
+        card.createdeck();
+        card.shuffleDeck();
 
-        Card.dealToPlayer();
-        Card.dealToDealer();
-        Card.dealToPlayer();
-        Card.dealToDealer();
+        card.dealToPlayer();
+        card.dealToDealer();
+        card.dealToPlayer();
+        card.dealToDealer();
 
         showPlayerHand();
-        Card.calcPlayerSum();
+        card.calcPlayerSum();
         System.out.println();
         showPlayerSum();
 
@@ -49,25 +57,25 @@ public class BlackJackGame {
     }
 
     public void checkWin() {
-        if (Card.calcDealerSum() < 22 && Card.calcPlayerSum() < 22) {
-            if (Card.calcDealerSum() > Card.calcPlayerSum()) {
+        if (card.calcDealerSum() < 22 && card.calcPlayerSum() < 22) {
+            if (card.calcDealerSum() > card.calcPlayerSum()) {
                 System.out.println("Dealer wins");
-                Bet.showCash();
+                bet.showCash();
             }
-            if (Card.calcPlayerSum() > Card.calcDealerSum()) {
+            if (card.calcPlayerSum() > card.calcDealerSum()) {
                 System.out.println("You win");
-                Bet.payOutWin();
-                Bet.showCash();
+                bet.payOutWin();
+                bet.showCash();
 
             }
 
-            if (Card.calcPlayerSum() == Card.calcDealerSum()) {
+            if (card.calcPlayerSum() == card.calcDealerSum()) {
                 System.out.println("Draw");
-                Bet.payOutTie();
-                Bet.showCash();
+                bet.payOutTie();
+                bet.showCash();
             }
             System.out.println();
-            Bet.checkcash();
+            bet.checkcash();
             newHand();
         }
 
@@ -80,7 +88,7 @@ public class BlackJackGame {
             String choice = input.nextLine();
             if (choice.toUpperCase().equals("HIT")) {
 
-                Card.dealToPlayer();
+                card.dealToPlayer();
                 System.out.println();
                 showPlayerHand();
                 System.out.println();
@@ -105,19 +113,19 @@ public class BlackJackGame {
     private void dealerTurn() {
         while (true) {
 
-            if (Card.calcDealerSum() < 16) {
-                Card.dealToDealer();
+            if (card.calcDealerSum() < 16) {
+                card.dealToDealer();
                 System.out.println();
                 showDealerHand();
                 System.out.println();
                 showdealerSum();
-            } else if (Card.calcDealerSum() >= 16) {
+            } else if (card.calcDealerSum() >= 16) {
                 System.out.println();
-                if (Card.calcDealerSum() > 21) {
-                    Bet.payOutWin();
+                if (card.calcDealerSum() > 21) {
+                    bet.payOutWin();
                     System.out.println("Dealer has Busted");
                     System.out.println();
-                    Bet.showCash();
+                    bet.showCash();
                     newHand();
                 } else {
                     System.out.println("Dealer Stays");
@@ -131,26 +139,28 @@ public class BlackJackGame {
     }
 
     private void newHand() {
-        Bet.checkcash();
+        bet.checkcash();
         System.out.println("Next hand? Yes or No");
         System.out.println();
-        String playagain = input.nextLine();
-        if (playagain.toUpperCase().equals("YES")) {
-            Card.playercard.clear();
-            Card.dealercard.clear();
-            Card.deck.clear();
-            play();
+        if(input.hasNextLine()){
+            String playagain = input.nextLine();
+            if (playagain.toUpperCase().equals("YES")) {
+                card.getPlayercard().clear();
+                card.getDealercard().clear();
+                card.getDeck().clear();
+                play();
 
-        } else if (playagain.toUpperCase().equals("NO")) {
-            System.exit(0);
-        } else {
-            newHand();
+            } else if (playagain.toUpperCase().equals("NO")) {
+                System.exit(0);
+            } else {
+                newHand();
+            }
         }
     }
 
     private void playerBust() {
 
-        if (Card.calcPlayerSum() > 21) {
+        if (card.calcPlayerSum() > 21) {
             System.out.println("Busted");
             System.out.println();
             newHand();
@@ -159,12 +169,12 @@ public class BlackJackGame {
     }
 
     public void showdealerSum() {
-        System.out.println("Dealer has " + Card.calcDealerSum());
+        System.out.println("Dealer has " + card.calcDealerSum());
 
     }
 
     public void showPlayerSum() {
-        System.out.println("You have " + Card.calcPlayerSum());
+        System.out.println("You have " + card.calcPlayerSum());
 
     }
 
@@ -172,7 +182,7 @@ public class BlackJackGame {
         System.out.println();
         System.out.println("Dealer Cards");
 
-        for (int i = 0; i < Card.dealercard.size(); i++) {
+        for (int i = 0; i < card.getDealercard().size(); i++) {
             System.out.print("[ ] ");
         }
 
@@ -182,8 +192,8 @@ public class BlackJackGame {
         System.out.println();
         System.out.println("Dealer Cards");
 
-        for (int i = 0; i < Card.dealercard.size(); i++) {
-            BlackJackCard dc = Card.dealercard.get(i);
+        for (int i = 0; i < card.getDealercard().size(); i++) {
+            BlackJackCard dc = card.getDealercard().get(i);
 
             if (dc.rank == 11) {
                 System.out.print("J of " + dc.suit + "  ");
@@ -208,8 +218,8 @@ public class BlackJackGame {
         System.out.println();
         System.out.println("Player Cards");
 
-        for (int i = 0; i < Card.playercard.size(); i++) {
-            BlackJackCard pc = Card.playercard.get(i);
+        for (int i = 0; i < card.getPlayercard().size(); i++) {
+            BlackJackCard pc = card.getPlayercard().get(i);
             if (pc.rank == 11) {
                 System.out.print("J of " + pc.suit + "  ");
             }
